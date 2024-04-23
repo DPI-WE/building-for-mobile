@@ -20,7 +20,7 @@ To make a Rails application responsive, you start by setting the viewport in the
 - Employ [CSS media queries](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Media_queries) to alter styles based on device characteristics.
 - Design mobile-first, which means designing for the smallest screen and scaling up. The majority of web traffic comes from mobile devices.
 
-![](assets/web-traffic.webp) [source](https://www.oberlo.com/statistics/mobile-internet-traffic)
+![](/assets/web-traffic.webp) [source](https://www.oberlo.com/statistics/mobile-internet-traffic)
 
 - Test responsiveness using [DevTools](https://developer.chrome.com/docs/devtools/) ([or your device](https://dev.to/heratyian/sharing-your-localhost-with-other-devices-easily-4o5)) to test different screen sizes.
 
@@ -117,7 +117,7 @@ You only need to setup the `service-worker.js` if you plan to add offline cachin
 
 If setup properly, you should now see an install prompt when opening your application.
 
-![](assets/install.png)
+![](/assets/install.png)
 
 Refer to these guides for detailed instructions:
 
