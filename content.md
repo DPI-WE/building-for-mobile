@@ -132,7 +132,6 @@ import './pwa/companion';
 ```erb
 <!-- app/views/layout/application.html.erb -->
 
-<!-- crossorigin attribute adds support for CORS  -->
 <link rel="manifest" href="/manifest.json" />
 ```
 
