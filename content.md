@@ -34,8 +34,8 @@ To make a Rails application responsive, you start by setting the viewport in the
 PWAs use modern web capabilities to deliver an app-like experience to users. They can be designed to work offline and perform fast, mimicking a native app on mobile and desktop environments.
 
 ### Key Benefits
-- Native-like feel with capabilities like push notifications, offline work mode, and home screen installation.
-- Broad accessibility via a standard web browser without the need for app store submission.
+- **Native-like feel**: with capabilities like push notifications, offline work mode, and home screen installation.
+- **Broad accessibility**: via a standard web browser without the need for app store submission.
 
 ### Limitations
 - **App Store Restrictions**: Not allowed in Apple’s iOS App Store, which might limit their visibility on iOS devices.
@@ -146,7 +146,7 @@ Hybrid Application frameworks are technologies used to build for multiple platfo
 - [Electron](https://www.electronjs.org/): Build cross-platform desktop apps with JavaScript, HTML, and CSS
 - and many more!
 
-4. Full Native Approach
+## 4. Full Native Approach
 Going fully native means using the platform-specific programming language and tools.
 
 - [iOS](https://developer.apple.com/): Develop with Swift or Objective-C.
