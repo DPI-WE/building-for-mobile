@@ -110,7 +110,6 @@ Need to create a bridge to connect your application to the service worker. This 
 ```js
 // app/javascript/pwa/companion.js
 
-
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/service-worker.js')
     .then((registration) => {
