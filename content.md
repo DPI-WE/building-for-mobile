@@ -25,6 +25,7 @@ To make a Rails application responsive, you start by setting the viewport in the
 - Test responsiveness using [DevTools](https://developer.chrome.com/docs/devtools/), [your device](https://dev.to/heratyian/sharing-your-localhost-with-other-devices-easily-4o5), or [Simulator](https://developer.apple.com/videos/play/wwdc2020/10647/) on macOS to test different devices.
 
 ![](/assets/simulator-1.png)
+
 ![](/assets/simulator-2.png)
 
 ## 2. Progressive Web Apps (PWAs)
