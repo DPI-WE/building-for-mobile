@@ -59,8 +59,8 @@ end
 
 ```ruby
 # config/routes.rb  
-get "/service-worker.js" => "service_worker#service_worker"
-get "/manifest.json" => "service_worker#manifest"
+get "/service-worker.js", to: "service_worker#service_worker"
+get "/manifest.json", to: "service_worker#manifest"
 ```
 
 2. **Setup the Web App Manifest**: Include a manifest file with metadata about the app (e.g., name, icons). This is usually available at `/manifest.json`.
