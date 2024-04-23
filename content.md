@@ -49,13 +49,7 @@ Despite these limitations, PWAs on iOS have been evolving, and many of these res
 
 ```ruby
 # app/controllers/service_worker_controller.rb
-class ServiceWorkerController < ApplicationController
-  # protect manifest cross-origin request forgery 
-  protect_from_forgery except: :service_worker
-
-  # if authenticate_user! set in ApplicationController
-  skip_before_action :authenticate_user!
-
+class ServiceWorkerController < ActionController::Base
   def service_worker; end
   def manifest; end
 end
@@ -67,7 +61,7 @@ get "/service-worker.js", to: "service_worker#service_worker"
 get "/manifest.json", to: "service_worker#manifest"
 ```
 
-2. **Setup the Web App Manifest**: Include a manifest file with metadata about the app (e.g., name, icons). This is usually available at `/manifest.json`.
+2. **Setup the Web App Manifest**: Include a [manifest file](https://developer.mozilla.org/en-US/docs/Web/Manifest) with metadata about the app (e.g., name, icons). This is usually available at `/manifest.json`.
 
 ```erb
 // app/views/service_worker/manifest.json.erb
@@ -90,25 +84,49 @@ get "/manifest.json", to: "service_worker#manifest"
 }
 ```
 
-3. **Service Workers**: Implement service workers for handling offline caching and resource retrieval strategies. Think of this as a "background assistant" for your progressive web app. This should be available at `/service-worker.js`.
+3. **Service Workers**: Implement service workers for handling offline caching and resource retrieval strategies. Think of this as a "background assistant" for your progressive web app. This should be available at `/service-worker.js`. You only need to setup the `service-worker.js` if you plan to add offline caching functionality.
 
 ```js
-self.addEventListener("install", event => {
-  console.log("Service worker installed");
+// app/views/service_worker/service_worker.js
+
+self.addEventListener('install', event => {
+    console.log("Service worker installed");
+    // Perform install steps
 });
 
-self.addEventListener("activate", event => {
-  console.log("Service worker activated");
+self.addEventListener('activate', event => {
+    console.log("Service worker activated");
+    // Clear old caches
 });
 
 self.addEventListener('fetch', event => {
-  console.log("Service worker fetching");
+    console.log("Service worker fetching:", event.request.url);
+    // Here you could add code to respond to the request
 });
 ```
 
-<aside>
-You only need to setup the `service-worker.js` if you plan to add offline caching functionality. For now we just want to confirm everything is hooked up properly by adding console logs.
-</aside>
+Need to create a bridge to connect your application to the service worker. This script tells your application when and from where to load your service worker.
+
+```js
+// app/javascript/pwa/companion.js
+
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/service-worker.js')
+    .then((registration) => {
+      console.log('Service Worker registered with scope:', registration.scope);
+    })
+    .catch((error) => {
+      console.log('Service Worker registration failed:', error);
+    });
+}
+```
+
+```js
+// app/javascript/application.js
+
+import './pwa/companion';
+```
 
 4. **Add to Home Screen**: Add `<link>` to prompt users to install the app on their home screens. 
 
@@ -116,7 +134,7 @@ You only need to setup the `service-worker.js` if you plan to add offline cachin
 <!-- app/views/layout/application.html.erb -->
 
 <!-- crossorigin attribute adds support for CORS  -->
-<link rel="manifest" crossorigin="use-credentials" href="/manifest.json" />
+<link rel="manifest" href="/manifest.json" />
 ```
 
 If setup properly, you should now see an install prompt when opening your application.
