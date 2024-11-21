@@ -48,8 +48,8 @@ Despite these limitations, PWAs on iOS have been evolving, and many of these res
 1. **Add Routes, Controller, and Views**
 
 ```ruby
-# app/controllers/service_worker_controller.rb
-class ServiceWorkerController < ActionController::Base
+# app/controllers/pwa_controller.rb
+class PwaController < ActionController::Base
   def service_worker; end
   def manifest; end
 end
@@ -57,14 +57,14 @@ end
 
 ```ruby
 # config/routes.rb  
-get "/service-worker.js", to: "service_worker#service_worker"
-get "/manifest.json", to: "service_worker#manifest"
+get "/service-worker.js", to: "pwa#service_worker"
+get "/manifest.json", to: "pwa#manifest"
 ```
 
 2. **Setup the Web App Manifest**: Include a [manifest file](https://developer.mozilla.org/en-US/docs/Web/Manifest) with metadata about the app (e.g., name, icons). This is usually available at `/manifest.json`.
 
 ```erb
-// app/views/service_worker/manifest.json.erb
+// app/views/pwa/manifest.json.erb
 {
   "short_name": "YourAppName",
   "name": "YourAppName",
@@ -87,7 +87,7 @@ get "/manifest.json", to: "service_worker#manifest"
 3. **Service Workers**: Implement service workers for handling offline caching and resource retrieval strategies. Think of this as a "background assistant" for your progressive web app. This should be available at `/service-worker.js`. You only need to setup the `service-worker.js` if you plan to add offline caching functionality.
 
 ```js
-// app/views/service_worker/service_worker.js
+// app/views/pwa/service_worker.js
 
 self.addEventListener('install', event => {
     console.log("Service worker installed");
